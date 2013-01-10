@@ -5,7 +5,7 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 (function($) {
-
+  
 $.fn.farbtastic = function (options) {
   $.farbtastic(this, options);
   return this;
@@ -59,6 +59,14 @@ $._farbtastic = function (container, callback) {
     if (typeof callback == 'function') {
       fb.callback = callback;
     }
+    else if (typeof callback === 'object' && callback.fbElement) {
+      fb.callback = $(callback.fbElement);
+      fb.callback.bind('keyup', fb.updateValue);
+      if (fb.callback.get(0).value) {
+        fb.setColor(fb.callback.get(0).value);
+      }
+      fb.fbChange = callback.fbChange;
+    }
     else if (typeof callback == 'object' || typeof callback == 'string') {
       fb.callback = $(callback);
       fb.callback.bind('keyup', fb.updateValue);
@@ -69,7 +77,7 @@ $._farbtastic = function (container, callback) {
     return this;
   };
   fb.updateValue = function (event) {
-    if (this.value && this.value != fb.color) {
+    if (this.value !== fb.color) {
       fb.setColor(this.value);
     }
   };
@@ -83,6 +91,12 @@ $._farbtastic = function (container, callback) {
       fb.color = color;
       fb.rgb = unpack;
       fb.hsl = fb.RGBToHSL(fb.rgb);
+      fb.updateDisplay();
+    }
+    if (color === null || color === "") {
+      fb.color = color;
+      fb.rgb = "";
+      fb.hsl = [0, 0, 0];
       fb.updateDisplay();
     }
     return this;
@@ -182,15 +196,22 @@ $._farbtastic = function (container, callback) {
     // Linked elements or callback
     if (typeof fb.callback == 'object') {
       // Set background/foreground color
-      $(fb.callback).css({
-        backgroundColor: fb.color,
-        color: fb.hsl[2] > 0.5 ? '#000' : '#fff'
-      });
+      if (fb.color !== null && fb.color !== "") {
+        $(fb.callback).css({
+          backgroundColor: fb.color,
+          color: fb.hsl[2] > 0.5 ? '#000' : '#fff'
+        });
+      } else {
+        $(fb.callback).removeAttr("style");
+      }
 
       // Change linked value
       $(fb.callback).each(function() {
-        if (this.value && this.value != fb.color) {
+        if (this.value !== fb.color) {
           this.value = fb.color;
+          if (fb.fbChange) {
+            fb.fbChange.apply(this, [this.value]);
+          }
         }
       });
     }

@@ -1,6 +1,10 @@
-# farbtastic-rails
+# farbtastic-inet-rails
 
 [Farbtastic](http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/) v[1.3u](https://github.com/mattfarina/farbtastic/tree/farbtastic-1), colorfully bundled for Rails 3+.
+
+## Inet-specific
+
+Uses a forked version of Farbtastic: https://github.com/mwanji/farbtastic/tree/inet_edge
 
 ## Rails 3.1+
 
@@ -23,29 +27,9 @@ To enable:
 ### Installation
 
 * Add `farbtastic-rails` to your Gemfile
-* Run `bundle`
+* Run `bundle install`
 
 Enjoy!
-
-
-## Rails 3.0
-
-This gem adds a single generator to Rails 3, `farbtastic:install`. Running the generator will install the JS, CSS and image files necessary to use Farbtastic.
-
-### Installation
-
-* Add `farbtastic-rails` to your Gemfile
-* Run `bundle`
-* Invoke the generator: `rails generate farbtastic:install`
-* Add the following to your layout or view files:
-
-```erb
-<%= stylesheet_link_tag "farbtastic" %>
-<%= javascript_include_tag "farbtastic" %>
-```
-
-You're done!
-
 
 ## Contributing
 
@@ -57,6 +41,12 @@ You're done!
 
 
 ## License
+
+**farbtastic-inet-rails**
+* Freely distributable and licensed under the [MIT license](http://phlipper.mit-license.org/license.html).
+* Copyright (c) 2012 Moandji Ezana (moandji@ezana.net)
+* http://moandjiezana.com
+
 
 **farbtastic-rails**
 

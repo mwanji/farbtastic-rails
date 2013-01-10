@@ -2,16 +2,15 @@
 require File.expand_path("../lib/farbtastic-rails/version", __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Phil Cohen"]
-  gem.email         = ["github@phlippers.net"]
-  gem.description   = %q{Farbtastic jQuery Color Picker, colorfully bundled for Rails 3+.}
-  gem.summary       = %q{Farbtastic jQuery Color Picker, colorfully bundled for Rails 3+.}
-  gem.homepage      = ""
-
-  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = "farbtastic-rails"
-  gem.require_paths = ["lib"]
   gem.version       = Farbtastic::Rails::VERSION
+  gem.authors       = ["Moandji Ezana", "Phil Cohen"]
+  gem.email         = ["moandji@ezana.net"]
+  gem.description   = %q{Uses a forked version of Farbtastic.}
+  gem.summary       = %q{Farbtastic jQuery Color Picker, colorfully bundled for Rails 3.1+.}
+  gem.homepage      = "https://github.com/mwanji/farbtastic-rails/tree/inet_edge"
+
+  gem.files         = `git ls-files`.split("\n")
+  gem.require_paths = ["lib"]
+  gem.add_runtime_dependency 'sass-rails'
 end
